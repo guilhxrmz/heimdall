@@ -2,13 +2,14 @@
   "name": "Heimdall",
   "private": true,
   "version": "1.0.0",
+  "type": "module",
   "description": "Nest TypeScript starter repository",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "node dist/main.js",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -32,6 +33,10 @@
     "rxjs": "^7.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.11",
+    "@babel/node": "^7.22.10",
+    "@babel/preset-env": "^7.22.14",
+    "@babel/preset-typescript": "^7.22.11",
     "@nestjs/cli": "^10.1.17",
     "@nestjs/schematics": "^7.3.1",
     "@nestjs/testing": "^10.2.4",
@@ -53,7 +58,7 @@
     "ts-loader": "^8.0.18",
     "ts-node": "^9.1.1",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^4.2.3"
+    "typescript": "^4.9.5"
   },
   "jest": {
     "moduleFileExtensions": [
