@@ -1,0 +1,44 @@
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Class } from './entities/class.entity';
+import { CreateClassDto } from './dto/create-class.dto';
+import { UpdateClassDto } from './dto/update-class.dto';
+@Injectable()
+export class ClassUserService {
+  /*
+constructor(
+  @InjectModel(ClassUser.name) private classModel: Model<ClassUser>,
+) {}
+async create(createClassUserDto: CreateClassUserDto): Promise<ClassUser> {
+  const createdClassUser = new this.classModel(CreateClassUserDto);
+  return createdClassUser.save();
+}*/
+}
+
+@Injectable()
+export class ClassService {
+  constructor(@InjectModel(Class.name) private classModel: Model<Class>) {}
+  async create(createClassDto: CreateClassDto): Promise<Class> {
+    const createdClass = new this.classModel(createClassDto);
+    return createdClass.save();
+  }
+
+  async findAll(): Promise<Class[]> {
+    return this.classModel.find().exec();
+  }
+
+  async findOne(id: number): Promise<Class> {
+    return this.classModel.findById(id).exec();
+  }
+
+  async update(id: number, updateClassDto: UpdateClassDto): Promise<Class> {
+    return this.classModel
+      .findByIdAndUpdate(id, updateClassDto, { new: true })
+      .exec();
+  }
+
+  async remove(id: number): Promise<Class> {
+    return this.classModel.findByIdAndRemove(id).exec();
+  }
+}
