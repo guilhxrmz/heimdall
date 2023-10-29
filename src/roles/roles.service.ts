@@ -18,17 +18,17 @@ export class RolesService {
     return this.roleModel.find().exec();
   }
 
-  async findOne(id: number): Promise<Role> {
+  async findOne(id: string): Promise<Role> {
     return this.roleModel.findById(id).exec();
   }
 
-  async update(id: number, updateRoleDto: UpdateRoleDto): Promise<Role> {
+  async update(id: string, updateRoleDto: UpdateRoleDto): Promise<Role> {
     return this.roleModel
       .findByIdAndUpdate(id, updateRoleDto, { new: true })
       .exec();
   }
 
-  async remove(id: number): Promise<Role> {
+  async remove(id: string): Promise<Role> {
     return this.roleModel.findByIdAndRemove(id).exec();
   }
 }

@@ -19,17 +19,26 @@ export class UsersService {
     return await this.userModel.find().exec();
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return await this.userModel.findById(id).exec();
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     return await this.userModel
       .findByIdAndUpdate(id, updateUserDto, { new: true })
       .exec();
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return await this.userModel.findByIdAndRemove(id).exec();
+  }
+
+  async login(email: string, password: string) {
+    const user = await this.userModel.findOne({ email }).exec();
+    if (user.encrypted_password == password) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

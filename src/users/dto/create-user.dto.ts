@@ -25,4 +25,8 @@ export class CreateUserDto {
   @IsString()
   @ApiProperty()
   role_id: string;
+
+  @IsString()
+  @ApiProperty()
+  institution_id: string;
 }
