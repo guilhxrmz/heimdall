@@ -28,5 +28,5 @@ export class CreateUserDto {
 
   @IsString()
   @ApiProperty()
-  institution_id: string;
+  Instituition_id: string;
 }
