@@ -4,17 +4,6 @@ import { Model } from 'mongoose';
 import { Class } from './entities/class.entity';
 import { CreateClassDto } from './dto/create-class.dto';
 import { UpdateClassDto } from './dto/update-class.dto';
-@Injectable()
-export class ClassUserService {
-  /*
-constructor(
-  @InjectModel(ClassUser.name) private classModel: Model<ClassUser>,
-) {}
-async create(createClassUserDto: CreateClassUserDto): Promise<ClassUser> {
-  const createdClassUser = new this.classModel(CreateClassUserDto);
-  return createdClassUser.save();
-}*/
-}
 
 @Injectable()
 export class ClassService {

@@ -1,26 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Room } from './entities/room.entity';
 import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 
 @Injectable()
 export class RoomService {
-  create(createRoomDto: CreateRoomDto) {
-    return 'This action adds a new room';
+  constructor(@InjectModel(Room.name) private roomModel: Model<Room>) {}
+
+  async create(createRoomDto: CreateRoomDto): Promise<Room> {
+    const createdRoom = new this.roomModel(createRoomDto);
+    return createdRoom.save();
   }
 
-  findAll() {
-    return `This action returns all room`;
+  async findAll(): Promise<Room[]> {
+    return this.roomModel.find().exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} room`;
+  async findOne(id: string): Promise<Room> {
+    const room = await this.roomModel.findById(id).exec();
+    if (!room) {
+      throw new NotFoundException('Room not found');
+    }
+    return room;
   }
 
-  update(id: number, updateRoomDto: UpdateRoomDto) {
-    return `This action updates a #${id} room`;
+  async update(id: string, updateRoomDto: UpdateRoomDto): Promise<Room> {
+    const updatedRoom = await this.roomModel
+      .findByIdAndUpdate(id, updateRoomDto, { new: true })
+      .exec();
+
+    if (!updatedRoom) {
+      throw new NotFoundException('Room not found');
+    }
+
+    return updatedRoom;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} room`;
+  async remove(id: string): Promise<void> {
+    const result = await this.roomModel.deleteOne({ _id: id }).exec();
+
+    if (result.deletedCount === 0) {
+      throw new NotFoundException('Room not found');
+    }
   }
 }

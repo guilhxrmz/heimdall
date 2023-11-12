@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ReserveService } from './reserve.service';
 import { CreateReserveDto } from './dto/create-reserve.dto';
 import { UpdateReserveDto } from './dto/update-reserve.dto';
@@ -20,16 +28,16 @@ export class ReserveController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.reserveService.findOne(+id);
+    return this.reserveService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateReserveDto: UpdateReserveDto) {
-    return this.reserveService.update(+id, updateReserveDto);
+    return this.reserveService.update(id, updateReserveDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.reserveService.remove(+id);
+    return this.reserveService.remove(id);
   }
 }

@@ -20,16 +20,16 @@ export class BlockController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.blockService.findOne(+id);
+    return this.blockService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBlockDto: UpdateBlockDto) {
-    return this.blockService.update(+id, updateBlockDto);
+    return this.blockService.update(id, updateBlockDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.blockService.remove(+id);
+    return this.blockService.remove(id);
   }
 }
