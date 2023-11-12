@@ -1,73 +1,41 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Relações de Entidades
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-  
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## User --o RoomReservation : user_id
 
-## Description
+Indica que um `User` está associado a zero ou muitas instâncias de `RoomReservation` através da chave estrangeira `user_id`.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Class --o RoomReservation : class_id
 
-## Installation
+Indica que uma `Class` está associada a zero ou muitas instâncias de `RoomReservation` através da chave estrangeira `class_id`.
 
-```bash
-$ npm install
-```
+## Institution --o User : institution_id
 
-## Running the app
+Reflete que uma `Institution` está associada a zero ou muitos usuários através da chave estrangeira `institution_id`.
 
-```bash
-# development
-$ npm run start
+## Course --o Room : course_id
 
-# watch mode
-$ npm run start:dev
+Indica que um `Course` está associado a zero ou muitas instâncias de `Room` através da chave estrangeira `course_id`.
 
-# production mode
-$ npm run start:prod
-```
+## User --\|> Role : role_id
 
-## Test
+Representa uma relação de herança indicando que um `User` possui um papel (`Role`) identificado pela chave `role_id`.
 
-```bash
-# unit tests
-$ npm run test
+## Class --\|> Class_Course : class_id
 
-# e2e tests
-$ npm run test:e2e
+Representa uma relação de herança indicando que uma `Class` pode estar relacionada a zero ou muitas instâncias de `Class_Course` através da chave `class_id`.
 
-# test coverage
-$ npm run test:cov
-```
+## Course --\|> Class_Course : course_id
 
-## Support
+Representa uma relação de herança indicando que um `Course` pode estar relacionado a zero ou muitas instâncias de `Class_Course` através da chave `course_id`.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Course --\|> Institution : institution_id
 
-## Stay in touch
+Indica que um `Course` está associado a uma `Institution` através da chave estrangeira `institution_id`.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Room --\|> Block : block_id
 
-## License
+Indica que uma `Room` está associada a um `Block` através da chave estrangeira `block_id`.
 
-  Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## RoomReservation --\|> Room : room_id
+
+Indica que uma `RoomReservation` está associada a uma `Room` através da chave estrangeira `room_id`.

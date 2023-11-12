@@ -22,4 +22,9 @@ export class CreateRoomDto {
   @IsString()
   @ApiProperty()
   block_id: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  course_id: string;
 }
