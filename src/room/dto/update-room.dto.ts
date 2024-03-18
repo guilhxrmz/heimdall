@@ -8,7 +8,43 @@ export class UpdateRoomDto extends PartialType(CreateRoomDto) {
   @IsString()
   @ApiProperty()
   @IsOptional()
-  name: string;
+  number: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  @IsOptional()
+  chairs: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  @IsOptional()
+  tables: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  @IsOptional()
+  chairByTables: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  @IsOptional()
+  computers: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  @IsOptional()
+  projectors: number;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty()
+  @IsOptional()
+  blackBoards: number;
 
   @IsNotEmpty()
   @IsNumber()

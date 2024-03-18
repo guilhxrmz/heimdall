@@ -28,4 +28,9 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsString()
   @ApiProperty()
   role_id: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty()
+  class_id: string;
 }
