@@ -16,18 +16,6 @@ export class UpdateReserveDto extends PartialType(CreateReserveDto) {
   readonly class_id?: string;
 
   @IsOptional()
-  @IsIn([
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ])
-  readonly day_of_week?: string;
-
-  @IsOptional()
   @IsISO8601()
   readonly start_time?: string;
 

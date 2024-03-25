@@ -15,25 +15,11 @@ export class Reserve extends Document {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Class', required: true })
   class_id: string;
 
-  @Prop({
-    required: true,
-    enum: [
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-      'Sunday',
-    ],
-  })
-  day_of_week: string;
+  @Prop({ required: true })
+  start_time: string;
 
   @Prop({ required: true })
-  start_time: Date;
-
-  @Prop({ required: true })
-  end_time: Date;
+  end_time: string;
 }
 
 export const ReserveSchema = SchemaFactory.createForClass(Reserve);

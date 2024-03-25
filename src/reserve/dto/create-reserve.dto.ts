@@ -18,19 +18,6 @@ export class CreateReserveDto {
   class_id: string;
 
   @IsNotEmpty()
-  @IsIn([
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ])
-  @ApiProperty()
-  day_of_week: string;
-
-  @IsNotEmpty()
   @IsISO8601()
   start_time: string;
 

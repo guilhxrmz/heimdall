@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import {format} from 'date-fns';
 import { Model } from 'mongoose';
 import { Reserve } from './entities/reserve.entity';
 import { CreateReserveDto } from './dto/create-reserve.dto';
@@ -13,6 +14,8 @@ export class ReserveService {
 
   async create(createReserveDto: CreateReserveDto): Promise<Reserve> {
     const createdReserve = new this.reserveModel(createReserveDto);
+    createdReserve.start_time = this.formatDate(createdReserve.start_time);
+    createdReserve.end_time = this.formatDate(createdReserve.end_time);
     return createdReserve.save();
   }
 
@@ -49,5 +52,10 @@ export class ReserveService {
     if (result.deletedCount === 0) {
       throw new NotFoundException('Reservation not found');
     }
+  }
+
+  // Function to format date in desired format
+    formatDate(date: string): string {
+      return format(date, 'ddd MMM dd yyyy HH:mm:ss XXX');
   }
 }
