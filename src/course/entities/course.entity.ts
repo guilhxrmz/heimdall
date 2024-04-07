@@ -9,7 +9,7 @@ export class Course extends Document {
     ref: 'Instituition',
     required: true,
   })
-  institution_id: string;
+  instituition: Instituition;
 
   @Prop({ required: true })
   name: string;
