@@ -59,9 +59,9 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get('teachers')
-  findTeachers() {
-    return this.usersService.findTeachers();
+  @Get('role/:idRole/inst/:idInst')
+  findByRoleAndInst(@Param('idRole') @Param('idInst')idRole: string , idInst : string ) {
+    return this.usersService.findByRoleAndInst(idRole, idInst);
   }
 
   @Get(':id')

@@ -18,20 +18,25 @@ export class UsersService {
     return await this.userModel.find().exec();
   }
 
-  async findTeachers() {
-    const roleId = '65f5c07e489c8ea56ac6ff5b'; // Define o valor padrão para "Teachers"
-
+  async findByRoleAndInst(idRole: string, idInst: string) {
     try {
-      const teachers = await this.userModel.find({ role: roleId });
+      const query = { role: idRole };
 
-      if (!teachers) {
-        return [];
+      // Check if idInst is provided
+      if (idInst) {
+        query['instituition'] = idInst; // Use bracket notation for dynamic property access
       }
 
-      return teachers;
+      const users = await this.userModel.find(query);
+
+      if (!users || users.length === 0) {
+        return []; // Return empty array if no users found
+      }
+
+      return users;
     } catch (error) {
-      console.error('Error finding teachers:', error);
-      throw error;
+      console.error('Error finding users:', error);
+      throw error; // Re-throw for potential global error handling
     }
   }
 
