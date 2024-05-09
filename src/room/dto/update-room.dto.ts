@@ -4,43 +4,43 @@ import { IsNotEmpty, IsNumber, IsOptional, IsPositive, IsString } from "@nestjs/
 import { ApiProperty } from "@nestjs/swagger";
 
 export class UpdateRoomDto extends PartialType(CreateRoomDto) {
-  @IsNotEmpty()
+
   @IsString()
   @ApiProperty()
   @IsOptional()
   number: number;
 
-  @IsNotEmpty()
+
   @IsString()
   @ApiProperty()
   @IsOptional()
   chairs: number;
 
-  @IsNotEmpty()
+
   @IsString()
   @ApiProperty()
   @IsOptional()
   tables: number;
 
-  @IsNotEmpty()
+
   @IsString()
   @ApiProperty()
   @IsOptional()
   chairByTables: number;
 
-  @IsNotEmpty()
+
   @IsString()
   @ApiProperty()
   @IsOptional()
   computers: number;
 
-  @IsNotEmpty()
+
   @IsString()
   @ApiProperty()
   @IsOptional()
   projectors: number;
 
-  @IsNotEmpty()
+
   @IsString()
   @ApiProperty()
   @IsOptional()

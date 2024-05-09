@@ -8,28 +8,28 @@ export class Room extends Document {
   @Prop({ required: true })
   number: number;
 
-  @Prop({ required: true, type: Number })
+  @Prop({  type: Number })
   chairs: number;
 
-  @Prop({ required: true, type: Number })
+  @Prop({  type: Number })
   tables: number;
 
-  @Prop({ required: true, type: Number })
+  @Prop({  type: Number })
   chairByTables: number;
 
-  @Prop({ required: true, type: Number })
+  @Prop({  type: Number })
   computers: number;
 
-  @Prop({ required: true, type: Number })
+  @Prop({  type: Number })
   projectors: number;
 
-  @Prop({ required: true, type: Number })
+  @Prop({  type: Number })
   blackBoards: number;
 
-  @Prop({ required: true, type: Number })
+  @Prop({  type: Number })
   capacity: number;
 
-  @Prop({ required: true })
+  @Prop()
   status: string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Block', required: false })
