@@ -17,17 +17,17 @@ export class ClassService {
     return this.classModel.find().exec();
   }
 
-  async findOne(id: number): Promise<Class> {
+  async findOne(id: string): Promise<Class> {
     return this.classModel.findById(id).exec();
   }
 
-  async update(id: number, updateClassDto: UpdateClassDto): Promise<Class> {
+  async update(id: string, updateClassDto: UpdateClassDto): Promise<Class> {
     return this.classModel
       .findByIdAndUpdate(id, updateClassDto, { new: true })
       .exec();
   }
 
-  async remove(id: number): Promise<Class> {
+  async remove(id: string): Promise<Class> {
     return this.classModel.findByIdAndRemove(id).exec();
   }
 }
