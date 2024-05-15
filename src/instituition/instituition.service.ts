@@ -35,10 +35,10 @@ export class InstituitionService {
       const instituitions = await this.InstituitionModel.find(query);
 
       if (!instituitions || instituitions.length === 0) {
-        return []; // Return empty array if no users found
+        throw 'Error: no instituitions found';
       }
 
-      return instituitions;
+      return instituitions[0];
     } catch (error) {
       console.error('Error finding instituitions:', error);
       throw error; // Re-throw for potential global error handling

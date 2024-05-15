@@ -4,14 +4,27 @@ import { InjectModel } from '@nestjs/mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { RegistrationRequest } from './entities/registration-request.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('User') private userModel: Model<User>) {}
+  constructor(
+    @InjectModel('User') private userModel: Model<User>,
+    @InjectModel('Registration') private registrationModel: Model<RegistrationRequest>
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     const createdUser = new this.userModel(createUserDto);
     return await createdUser.save();
+  }
+
+  async createRegistrationRequest(createUserDto: CreateUserDto) {
+    const createdUser = new this.registrationModel(createUserDto);
+    return await createdUser.save();
+  }
+
+  async findAllRegistrationRequest() {
+    return await this.registrationModel.find();
   }
 
   async findAll() {
