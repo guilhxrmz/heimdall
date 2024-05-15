@@ -7,10 +7,10 @@ import { UpdateClassDto } from './dto/update-class.dto';
 
 @Injectable()
 export class ClassService {
-  constructor(@InjectModel(Class.name) private classModel: Model<Class>) {}
-  async create(createClassDto: CreateClassDto): Promise<Class> {
+  constructor(@InjectModel("Class") private classModel: Model<Class>) {}
+  async create(createClassDto: CreateClassDto) {
     const createdClass = new this.classModel(createClassDto);
-    return createdClass.save();
+    return await createdClass.save();
   }
 
   async findAll(): Promise<Class[]> {

@@ -1,5 +1,4 @@
 import { IsString } from '@nestjs/class-validator';
-import { User } from '../../users/entities/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateClassDto {
@@ -13,5 +12,5 @@ export class CreateClassDto {
 
   @IsString()
   @ApiProperty()
-  teachers: User[];
+  teachers_id: string;
 }

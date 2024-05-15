@@ -11,7 +11,7 @@ import { InstituitionModule } from './instituition/instituition.module';
 import { ReserveModule } from './reserve/reserve.module';
 import { RoomModule } from './room/room.module';
 import { BlockModule } from './block/block.module';
-import { ClassUserModule } from './class/class-user.module';
+
 
 @Module({
   imports: [
@@ -21,7 +21,6 @@ import { ClassUserModule } from './class/class-user.module';
     RolesModule,
     UsersModule,
     ClassModule,
-    ClassUserModule,
     CourseModule,
     InstituitionModule,
     ReserveModule,

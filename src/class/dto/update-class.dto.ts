@@ -11,5 +11,5 @@ export class UpdateClassDto extends PartialType(CreateClassDto) {
   description: string;
 
   @IsString()
-  teachers: User[];
+  teachers_id: string;
 }
