@@ -31,6 +31,11 @@ export class InstituitionController {
     return this.instituitionService.findOne(id);
   }
 
+  @Get('search-by-name/:nameInst')
+  findByName(@Param('nameInst') nameInst: string ) {
+    return this.instituitionService.findByName(nameInst);
+  }
+
   @Patch(':id')
   update(
     @Param('id') id: string,

@@ -27,6 +27,24 @@ export class InstituitionService {
     return this.InstituitionModel.findById(id).exec();
   }
 
+  
+  async findByName(name: string) {
+    try {
+      const query = { name };
+
+      const instituitions = await this.InstituitionModel.find(query);
+
+      if (!instituitions || instituitions.length === 0) {
+        return []; // Return empty array if no users found
+      }
+
+      return instituitions;
+    } catch (error) {
+      console.error('Error finding instituitions:', error);
+      throw error; // Re-throw for potential global error handling
+    }
+  }
+
   async update(
     id: string,
     updateInstituitionDto: UpdateInstituitionDto,
