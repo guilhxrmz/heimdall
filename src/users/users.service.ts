@@ -40,8 +40,15 @@ export class UsersService {
       });
   }
 
-  async findAllRegistrationRequest() {
-    return await this.registrationModel.find();
+  async findAllRegistrationRequest(instituition: string) {
+    const query = { instituition };
+    const registrations = await this.userModel.find(query);
+    
+    if (!registrations || registrations.length === 0) {
+      return []; // Return empty array if no registrations found
+    }
+
+    return registrations;
   }
 
   async findAll() {

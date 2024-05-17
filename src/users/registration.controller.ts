@@ -29,9 +29,9 @@ export class RegistrationController {
     return this.usersService.validateRegistrationRequest(registrationRequest);
   }
 
-  @Get()
-  findAllRegistrationRequest() {
-    return this.usersService.findAllRegistrationRequest();
+  @Get(':id')
+  findAllRegistrationRequest(@Param('id') id:string) {
+    return this.usersService.findAllRegistrationRequest(id);
   }
   
   @Delete(':id')
