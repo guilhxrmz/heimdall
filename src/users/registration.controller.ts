@@ -9,11 +9,10 @@ import {
   HttpStatus,
   Res,
 } from '@nestjs/common';
-import { Response } from 'express';
 import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBody, ApiTags } from "@nestjs/swagger";
+import { RegistrationUserDto } from './dto/registration-user.dto';
+import { RegistrationRequest } from './entities/registration-request.entity';
 @ApiTags('registration')
 @Controller('registration')
 export class RegistrationController {
@@ -21,13 +20,23 @@ export class RegistrationController {
 
  
   @Post()
-  createRegistrationRequest(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.createRegistrationRequest(createUserDto);
+  createRegistrationRequest(@Body() registrationUserDto: RegistrationUserDto) {
+    return this.usersService.createRegistrationRequest(registrationUserDto);
   }
 
-  @Get() // Remova esta parte: ':id'
+  @Post('/validate')
+  validateRegistrationRequest(@Body() registrationRequest: RegistrationRequest[]) {
+    return this.usersService.validateRegistrationRequest(registrationRequest);
+  }
+
+  @Get()
   findAllRegistrationRequest() {
     return this.usersService.findAllRegistrationRequest();
+  }
+  
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.usersService.removeRegistration(id);
   }
 
 }

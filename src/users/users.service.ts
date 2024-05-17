@@ -5,6 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { RegistrationRequest } from './entities/registration-request.entity';
+import { RegistrationUserDto } from './dto/registration-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -18,9 +19,25 @@ export class UsersService {
     return await createdUser.save();
   }
 
-  async createRegistrationRequest(createUserDto: CreateUserDto) {
-    const createdUser = new this.registrationModel(createUserDto);
+  async createRegistrationRequest(registrationUserDto: RegistrationUserDto) {
+    registrationUserDto.status = 'IDLE'
+    const createdUser = new this.registrationModel(registrationUserDto);
     return await createdUser.save();
+  }
+
+  async removeRegistration(id: string) {
+    return await this.registrationModel.findByIdAndRemove(id).exec();
+  }
+
+  async validateRegistrationRequest(registrationModel: RegistrationRequest[]) {
+      registrationModel.forEach(async request => {
+        if(request.status == 'CONFIRMED') {
+          await this.create(new CreateUserDto(request));
+          await this.removeRegistration(request._id)
+        } else if (request.status == 'REJECTED') {
+          await this.removeRegistration(request._id)
+        }
+      });
   }
 
   async findAllRegistrationRequest() {

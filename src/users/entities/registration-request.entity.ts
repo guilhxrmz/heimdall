@@ -20,6 +20,9 @@ export class RegistrationRequest extends Document {
 
   @Prop({ required: true })
   registration_number: string;
+  
+  @Prop({ required: false })
+  status: 'CONFIRMED'| 'REJECTED' | 'IDLE' = 'IDLE';
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Role' })
   role: Role;

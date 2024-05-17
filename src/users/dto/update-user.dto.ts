@@ -32,5 +32,5 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsOptional()
   @IsString()
   @ApiProperty()
-  class_id: string;
+  class_id: string[];
 }
