@@ -13,6 +13,7 @@ import { UsersService } from './users.service';
 import { ApiBody, ApiTags } from "@nestjs/swagger";
 import { RegistrationUserDto } from './dto/registration-user.dto';
 import { RegistrationRequest } from './entities/registration-request.entity';
+import { RegistrationUserValidDto } from './dto/registration-user-valid.dto';
 @ApiTags('registration')
 @Controller('registration')
 export class RegistrationController {
@@ -25,7 +26,7 @@ export class RegistrationController {
   }
 
   @Post('/validate')
-  validateRegistrationRequest(@Body() registrationRequest: RegistrationRequest[]) {
+  validateRegistrationRequest(@Body() registrationRequest: RegistrationUserValidDto[]) {
     return this.usersService.validateRegistrationRequest(registrationRequest);
   }
 

@@ -6,6 +6,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { RegistrationRequest } from './entities/registration-request.entity';
 import { RegistrationUserDto } from './dto/registration-user.dto';
+import { RegistrationUserValidDto } from './dto/registration-user-valid.dto';
 
 @Injectable()
 export class UsersService {
@@ -15,6 +16,7 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
+    console.log('createUserDto', createUserDto)
     const createdUser = new this.userModel(createUserDto);
     return await createdUser.save();
   }
@@ -29,10 +31,23 @@ export class UsersService {
     return await this.registrationModel.findByIdAndRemove(id).exec();
   }
 
-  async validateRegistrationRequest(registrationModel: RegistrationRequest[]) {
+  async validateRegistrationRequest(registrationModel: RegistrationUserValidDto[]) {
       registrationModel.forEach(async request => {
         if(request.status == 'CONFIRMED') {
-          await this.create(new CreateUserDto(request));
+          const createdUser = new this.userModel({
+            registration_number: request.registration_number,
+            name: request.name,
+            email: request.email,
+            encrypted_password: request.encrypted_password,
+            role: {
+                _id: request.role
+            },
+            class: request.class,
+            instituition: {
+                _id: request.instituition
+            }
+          });
+          await createdUser.save();
           await this.removeRegistration(request._id)
         } else if (request.status == 'REJECTED') {
           await this.removeRegistration(request._id)
@@ -42,7 +57,7 @@ export class UsersService {
 
   async findAllRegistrationRequest(instituition: string) {
     const query = { instituition };
-    const registrations = await this.userModel.find(query);
+    const registrations = await this.registrationModel.find(query);
     
     if (!registrations || registrations.length === 0) {
       return []; // Return empty array if no registrations found
