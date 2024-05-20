@@ -18,6 +18,23 @@ export class RoomService {
     return this.roomModel.find().exec();
   }
 
+  async findByInst(idInst: string) {
+    try {
+      const query = { instituition: idInst };
+
+      const users = await this.roomModel.find(query);
+
+      if (!users || users.length === 0) {
+        return [];
+      }
+
+      return users;
+    } catch (error) {
+      console.error('Error finding rooms:', error);
+      throw error;
+    }
+  }
+
   async findOne(id: string): Promise<Room> {
     const room = await this.roomModel.findById(id).exec();
     if (!room) {

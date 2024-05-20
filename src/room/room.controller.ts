@@ -18,6 +18,11 @@ export class RoomController {
     return this.roomService.findAll();
   }
 
+  @Get('/by-inst/:id')
+  findByInst(@Param('id') id: string) {
+    return this.roomService.findByInst(id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.roomService.findOne(id);

@@ -70,4 +70,8 @@ export class UpdateRoomDto extends PartialType(CreateRoomDto) {
   @ApiProperty()
   @IsOptional()
   course_id: string;
+
+  @IsString()
+  @ApiProperty()
+  Instituition_id: string;
 }

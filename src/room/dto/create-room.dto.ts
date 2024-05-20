@@ -48,15 +48,14 @@ export class CreateRoomDto {
   @ApiProperty()
   status: string;
 
-  @IsString()
-  @ApiProperty()
-  @IsOptional()
-  block_id: string;
-
 
   @IsString()
   @ApiProperty()
   @IsOptional()
   course_id: string;
+
+  @IsString()
+  @ApiProperty()
+  Instituition_id: string;
 
 }

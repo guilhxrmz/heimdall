@@ -2,6 +2,7 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Block } from '../../block/entities/block.entity';
 import { Course } from '../../course/entities/course.entity';
+import { Instituition } from '../../instituition/entities/instituition.entity';
 
 @Schema()
 export class Room extends Document {
@@ -32,11 +33,11 @@ export class Room extends Document {
   @Prop()
   status: string;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Block', required: false })
-  block_id: string;
-
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Course', required: false })
   course_id: string;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Instituition' })
+  instituition: Instituition;
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);
