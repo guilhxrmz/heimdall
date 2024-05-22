@@ -60,7 +60,7 @@ export class UsersController {
   }
 
   @Get('role/:idRole/inst/:idInst')
-  findByRoleAndInst(@Param('idRole') @Param('idInst')idRole: string , idInst : string ) {
+  findByRoleAndInst(@Param('idRole') idRole: string , @Param('idInst')idInst : string ) {
     return this.usersService.findByRoleAndInst(idRole, idInst);
   }
 
