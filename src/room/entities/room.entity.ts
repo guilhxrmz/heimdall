@@ -37,7 +37,7 @@ export class Room extends Document {
   course_id: string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Instituition' })
-  instituition: Instituition;
+  instituition_id: string;
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);

@@ -28,11 +28,10 @@ export class CourseService {
 
   async findCourseByInst(id: string){
     try {
-      const courses = await this.courseModel.find({ instituition: id
-      });
+      const courses = await this.courseModel.find({ instituition: id});
 
       if (!courses || courses.length === 0) {
-        throw new NotFoundException('No courses found for the provided institution ID.');
+        return []
       }
 
       return courses;
