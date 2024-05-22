@@ -30,6 +30,11 @@ export class ClassController {
     return this.classService.findOne(id);
   }
 
+  @Get('/by-course/:id')
+  findByInst(@Param('id') id: string) {
+    return this.classService.findByCourse(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateClassDto: UpdateClassDto) {
     return this.classService.update(id, updateClassDto);

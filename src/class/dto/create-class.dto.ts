@@ -1,4 +1,4 @@
-import { IsString } from '@nestjs/class-validator';
+import { IsArray, IsString } from '@nestjs/class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateClassDto {
@@ -10,7 +10,11 @@ export class CreateClassDto {
   @ApiProperty()
   description: string;
 
+  @IsArray()
+  @ApiProperty()
+  teachers_id: string[];
+  
   @IsString()
   @ApiProperty()
-  teachers_id: string;
+  course_id: string;
 }

@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateClassDto } from './create-class.dto';
-import { IsString } from '@nestjs/class-validator';
+import { IsArray, IsString } from '@nestjs/class-validator';
 import { User } from '../../users/entities/user.entity';
 
 export class UpdateClassDto extends PartialType(CreateClassDto) {
@@ -10,6 +10,9 @@ export class UpdateClassDto extends PartialType(CreateClassDto) {
   @IsString()
   description: string;
 
+  @IsArray()
+  teachers_id: string[];
+
   @IsString()
-  teachers_id: string;
+  course_id: string;
 }

@@ -17,6 +17,23 @@ export class ClassService {
     return this.classModel.find().exec();
   }
 
+  async findByCourse(course_id: string) {
+    try {
+      const query = { course_id };
+
+      const users = await this.classModel.find(query);
+
+      if (!users || users.length === 0) {
+        return [];
+      }
+
+      return users;
+    } catch (error) {
+      console.error('Error finding class:', error);
+      throw error;
+    }
+  }
+
   async findOne(id: string): Promise<Class> {
     return this.classModel.findById(id).exec();
   }
