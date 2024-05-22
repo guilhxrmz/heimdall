@@ -20,7 +20,7 @@ export class RoomService {
 
   async findByInst(idInst: string) {
     try {
-      const query = { instituition: idInst };
+      const query = { instituition_id: idInst };
 
       const users = await this.roomModel.find(query);
 
