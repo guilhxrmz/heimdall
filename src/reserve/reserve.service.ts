@@ -7,6 +7,7 @@ import { CreateReserveDto } from './dto/create-reserve.dto';
 import { UpdateReserveDto } from './dto/update-reserve.dto';
 import { RoomService } from '../room/room.service';
 import { UsersService } from '../users/users.service';
+import { UpdateRoomDto } from '../room/dto/update-room.dto';
 
 @Injectable()
 export class ReserveService {
@@ -17,6 +18,16 @@ export class ReserveService {
   ) {}
 
   async create(createReserveDto: CreateReserveDto): Promise<Reserve> {
+    const room = await this.roomService.findOne(createReserveDto.room_id);
+    const roomObj = room.toObject();
+    const updateRoomDto: UpdateRoomDto = {
+      ...roomObj,
+      status: 'OCUPADA',
+    } as unknown as UpdateRoomDto;
+
+    this.roomService.update(roomObj._id as string, updateRoomDto)
+
+
     const createdReserve = new this.reserveModel(createReserveDto);
     createdReserve.start_time = createdReserve.start_time;
     createdReserve.end_time = createdReserve.end_time;
