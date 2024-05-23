@@ -10,5 +10,6 @@ import { RegistrationController } from './registration.controller';
   imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema },{ name: 'Registration', schema: RegistrationSchema }])],
   controllers: [UsersController, RegistrationController],
   providers: [UsersService],
+  exports: [UsersService, MongooseModule]
 })
 export class UsersModule {}
