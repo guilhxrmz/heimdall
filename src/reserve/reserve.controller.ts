@@ -31,6 +31,11 @@ export class ReserveController {
     return this.reserveService.findOne(id);
   }
 
+  @Get('/by-class/:id')
+  findByInst(@Param('id') id: string) {
+    return this.reserveService.findByClass(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateReserveDto: UpdateReserveDto) {
     return this.reserveService.update(id, updateReserveDto);

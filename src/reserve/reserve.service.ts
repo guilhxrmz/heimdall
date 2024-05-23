@@ -31,6 +31,23 @@ export class ReserveService {
     return reserve;
   }
 
+  async findByClass(class_id: string) {
+    try {
+      const query = { class_id };
+
+      const users = await this.reserveModel.find(query);
+
+      if (!users || users.length === 0) {
+        return [];
+      }
+
+      return users;
+    } catch (error) {
+      console.error('Error finding reserves:', error);
+      throw error;
+    }
+  }
+
   async update(
     id: string,
     updateReserveDto: UpdateReserveDto,
