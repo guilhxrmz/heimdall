@@ -5,11 +5,15 @@ import { Model } from 'mongoose';
 import { Reserve } from './entities/reserve.entity';
 import { CreateReserveDto } from './dto/create-reserve.dto';
 import { UpdateReserveDto } from './dto/update-reserve.dto';
+import { RoomService } from '../room/room.service';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class ReserveService {
   constructor(
     @InjectModel(Reserve.name) private reserveModel: Model<Reserve>,
+    private roomService: RoomService,
+    private usersService: UsersService,
   ) {}
 
   async create(createReserveDto: CreateReserveDto): Promise<Reserve> {
@@ -35,13 +39,29 @@ export class ReserveService {
     try {
       const query = { class_id };
 
-      const users = await this.reserveModel.find(query);
+      const reserves = await this.reserveModel.find(query);
 
-      if (!users || users.length === 0) {
+      if (!reserves || reserves.length === 0) {
         return [];
       }
 
-      return users;
+      
+      const roomPromises = reserves.map(reserve => this.roomService.findOne(reserve.room_id));
+    const rooms = await Promise.all(roomPromises);
+
+    // Busca as informações dos teachers (ou users) correspondentes
+    const teacherPromises = reserves.map(reserve => this.usersService.findOne(reserve.user_id));
+    const teachers = await Promise.all(teacherPromises);
+
+    // Adiciona os objetos rooms e teachers às respectivas reservas
+    const reservesWithDetails = reserves.map((reserve, index) => ({
+      ...reserve.toObject(),
+      room: rooms[index],
+      teacher: teachers[index]
+    }));
+
+    // Retorna as reservas com os objetos rooms e teachers aninhados
+    return reservesWithDetails;
     } catch (error) {
       console.error('Error finding reserves:', error);
       throw error;
