@@ -18,10 +18,10 @@ export class CreateReserveDto {
   class_id: string;
 
   @IsNotEmpty()
-  @IsISO8601()
+  @IsString()
   start_time: string;
 
   @IsNotEmpty()
-  @IsISO8601()
+  @IsString()
   end_time: string;
 }

@@ -14,8 +14,8 @@ export class ReserveService {
 
   async create(createReserveDto: CreateReserveDto): Promise<Reserve> {
     const createdReserve = new this.reserveModel(createReserveDto);
-    createdReserve.start_time = this.formatDate(createdReserve.start_time);
-    createdReserve.end_time = this.formatDate(createdReserve.end_time);
+    createdReserve.start_time = createdReserve.start_time;
+    createdReserve.end_time = createdReserve.end_time;
     return createdReserve.save();
   }
 

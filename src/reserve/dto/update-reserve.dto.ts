@@ -16,10 +16,10 @@ export class UpdateReserveDto extends PartialType(CreateReserveDto) {
   readonly class_id?: string;
 
   @IsOptional()
-  @IsISO8601()
+  @IsString()
   readonly start_time?: string;
 
   @IsOptional()
-  @IsISO8601()
+  @IsString()
   readonly end_time?: string;
 }
