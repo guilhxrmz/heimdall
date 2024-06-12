@@ -95,10 +95,27 @@ export class ReserveService {
   }
 
   async remove(id: string): Promise<void> {
-    const result = await this.reserveModel.deleteOne({ _id: id }).exec();
+    // Obter a reserva pelo id para acessar o room_id
+    const reserve = await this.reserveModel.findById(id).exec();
+    if (!reserve) {
+      throw new NotFoundException('Reservation not found');
+    }
 
+    const result = await this.reserveModel.deleteOne({ _id: id }).exec();
     if (result.deletedCount === 0) {
       throw new NotFoundException('Reservation not found');
+    }
+
+    // Atualizar o status do room para "DISPONIVEL"
+    const room = await this.roomService.findOne(reserve.room_id);
+    if (room) {
+      const roomObj = room.toObject();
+      const updateRoomDto: UpdateRoomDto = {
+        ...roomObj,
+        status: 'DISPONIVEL',
+      } as unknown as UpdateRoomDto;
+
+      await this.roomService.update(roomObj._id as string, updateRoomDto);
     }
   }
 
